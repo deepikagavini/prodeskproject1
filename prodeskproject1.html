@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Clock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clock-container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+    }
+
+    .clock-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .time {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px 15px;
+      border-radius: 10px;
+      width: 80px;
+    }
+
+    .box h2 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .box span {
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .ampm {
+      background: green;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="clock-container">
+    <div class="clock-title">DIGITAL CLOCK</div>
+    <div class="time">
+      <div class="box">
+        <h2 id="hours">00</h2>
+        <span>Hours</span>
+      </div>
+      <div class="box">
+        <h2 id="minutes">00</h2>
+        <span>Minutes</span>
+      </div>
+      <div class="box">
+        <h2 id="seconds">00</h2>
+        <span>Seconds</span>
+      </div>
+      <div class="ampm" id="ampm">AM</div>
+    </div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+
+      hours = hours % 12;
+      hours = hours ? hours : 12; // 0 should be 12
+
+      document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      document.getElementById('ampm').textContent = ampm;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call
+  </script>
+
+</body>
+</html>
